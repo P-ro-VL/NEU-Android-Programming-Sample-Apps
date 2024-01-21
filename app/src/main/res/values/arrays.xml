@@ -1,0 +1,7 @@
+<resources>
+    <string-array name="expense_categories">
+        <item>Thể loại 1</item>
+        <item>Thể loại 2</item>
+        <!-- Thêm các thể loại khác nếu cần -->
+    </string-array>
+</resources>

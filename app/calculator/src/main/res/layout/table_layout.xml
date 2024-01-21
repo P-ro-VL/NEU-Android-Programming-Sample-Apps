@@ -1,0 +1,173 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:stretchColumns="*">
+
+    <TableRow android:layout_weight="1">
+        <TextView
+            android:id="@+id/textViewResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="4"
+            android:ems="10"
+            android:gravity="right|center_vertical"
+            android:hint="0"
+            android:padding="8dp"
+            android:textSize="100sp" />
+    </TableRow>
+
+    <TableRow android:layout_weight="1">
+
+        <Button
+            android:id="@+id/buttonAC"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/ACButtonStyle"
+            android:text="AC" />
+
+        <Button
+            android:id="@+id/buttonParentheses"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/FunctionButtonStyle"
+            android:text="()" />
+
+        <Button
+            android:id="@+id/buttonPercent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/FunctionButtonStyle"
+            android:text="%" />
+
+        <Button
+            android:id="@+id/buttonDivide"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/FunctionButtonStyle"
+            android:text="/" />
+    </TableRow>
+
+    <TableRow android:layout_weight="1">
+
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/NumberButtonStyle"
+            android:text="7" />
+
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/NumberButtonStyle"
+            android:text="8" />
+
+        <Button
+            android:id="@+id/button9"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/NumberButtonStyle"
+            android:text="9" />
+
+        <Button
+            android:id="@+id/buttonMultiply"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/FunctionButtonStyle"
+            android:text="*" />
+    </TableRow>
+
+    <TableRow android:layout_weight="1">
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/NumberButtonStyle"
+            android:text="4" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/NumberButtonStyle"
+            android:text="5" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/NumberButtonStyle"
+            android:text="6" />
+
+        <Button
+            android:id="@+id/buttonSubtract"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/FunctionButtonStyle"
+            android:text="-" />
+    </TableRow>
+
+    <TableRow android:layout_weight="1">
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/NumberButtonStyle"
+            android:text="1" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/NumberButtonStyle"
+            android:text="2" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/NumberButtonStyle"
+            android:text="3" />
+
+        <Button
+            android:id="@+id/buttonAdd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/FunctionButtonStyle"
+            android:text="+" />
+    </TableRow>
+
+    <TableRow android:layout_weight="1">
+
+        <Button
+            android:id="@+id/button0"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/NumberButtonStyle"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/buttonDot"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/NumberButtonStyle"
+            android:text="." />
+
+        <Button
+            android:id="@+id/buttonBack"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/NumberButtonStyle"
+            android:text="⌫" />
+
+        <Button
+            android:id="@+id/buttonEqual"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/FunctionButtonStyle"
+            android:text="=" />
+    </TableRow>
+</TableLayout>

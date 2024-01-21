@@ -1,0 +1,8 @@
+<resources>
+    <string-array name="expense_categories">
+        <item>Đồ ăn</item>
+        <item>Di chuyển</item>
+        <item>Giải trí</item>
+        <item>Khác</item>
+    </string-array>
+</resources>
