@@ -13,6 +13,8 @@
             <option value="$PROJECT_DIR$/app/calculator" />
             <option value="$PROJECT_DIR$/app/clock" />
             <option value="$PROJECT_DIR$/app/expensify" />
+            <option value="$PROJECT_DIR$/app/note" />
+            <option value="$PROJECT_DIR$/app/quiz" />
             <option value="$PROJECT_DIR$/app/test" />
             <option value="$PROJECT_DIR$/app/unitconverter" />
           </set>

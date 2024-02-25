@@ -1,0 +1,27 @@
+[
+  {
+    "content": "What is the capital of France?",
+    "options": "[\"Paris\", \"London\", \"Berlin\", \"Madrid\"]",
+    "answer": "Paris"
+  },
+  {
+    "content": "What is the capital of Vietnam?",
+    "options": "[\"Hanoi\", \"Cambodia\", \"Beijing\", \"Tokyo\"]",
+    "answer": "Hanoi"
+  },
+  {
+    "content": "What is 2 + 2?",
+    "options": "[\"3\", \"4\", \"5\", \"6\"]",
+    "answer": "4"
+  },
+  {
+    "content": "What is the largest ocean on Earth?",
+    "options": "[\"Atlantic Ocean\", \"Indian Ocean\", \"Arctic Ocean\", \"Pacific Ocean\"]",
+    "answer": "Pacific Ocean"
+  },
+  {
+    "content": "Which planet is known as the Red Planet?",
+    "options": "[\"Mars\", \"Venus\", \"Jupiter\", \"Saturn\"]",
+    "answer": "Mars"
+  }
+]
