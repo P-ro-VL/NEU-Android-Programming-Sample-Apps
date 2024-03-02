@@ -17,6 +17,22 @@
       <entry key="app.expensify">
         <State />
       </entry>
+      <entry key="app.lexispeak">
+        <State>
+          <runningDeviceTargetSelectedWithDropDown>
+            <Target>
+              <type value="RUNNING_DEVICE_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="$USER_HOME$/.android/avd/Pixel_3a_API_34_extension_level_7_x86_64.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </runningDeviceTargetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-03-01T13:54:55.976298Z" />
+        </State>
+      </entry>
       <entry key="app.note">
         <State />
       </entry>
@@ -54,6 +70,9 @@
           </runningDeviceTargetSelectedWithDropDown>
           <timeTargetWasSelectedWithDropDown value="2024-01-07T15:46:56.231999Z" />
         </State>
+      </entry>
+      <entry key="app.vocab">
+        <State />
       </entry>
     </value>
   </component>
