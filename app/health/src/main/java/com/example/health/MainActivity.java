@@ -138,13 +138,13 @@ public class MainActivity extends AppCompatActivity {
                     float x = event.values[0];
                     float y = event.values[1];
                     float z = event.values[2];
-                    // Tính toán gia tốc dọc
-                    float verticalAcceleration = (float) Math.sqrt(x * x + y * y + z * z);
+                    // Tính toán gia tốc
+                    float acceleration = (float) Math.sqrt(x * x + y * y + z * z);
 
                     // Kiểm tra nếu đang đi bộ và có sự thay đổi trong gia tốc độ dọc
-                    if (isWalking && verticalAcceleration < STEP_THRESHOLD) {
+                    if (isWalking && acceleration < STEP_THRESHOLD) {
                         isWalking = false;
-                    } else if (!isWalking && verticalAcceleration > STEP_THRESHOLD) {
+                    } else if (!isWalking && acceleration > STEP_THRESHOLD) {
                         isWalking = true;
                         stepCount++;
                         stepTextView.setText("" + stepCount);
