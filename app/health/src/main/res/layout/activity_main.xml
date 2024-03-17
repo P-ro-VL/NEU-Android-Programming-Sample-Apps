@@ -11,31 +11,36 @@
         android:layout_marginTop="32dp">
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tempTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="🌡️\n\n0°C"
-            android:textSize="25sp" />
+            android:text="🌡️ 0°C"
+            android:textSize="22sp" />
+
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/pressureTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="🕛 \n\n 0 hPA"
-            android:textSize="25sp" />
+            android:text="🕛 0 hPA"
+            android:textSize="22sp" />
+
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/humidTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="💧\n\n 0%"
-            android:textSize="25sp" />
+            android:text="💧 0%"
+            android:textSize="22sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -44,54 +49,70 @@
         android:layout_marginTop="32dp">
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/proximityTextView"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:layout_weight="1"
             android:gravity="center"
-            android:text="📏\n\n 0cm"
-            android:textSize="25sp" />
+            android:text="📏 0cm"
+            android:textSize="22sp" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/lightTextView"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:layout_weight="1"
             android:gravity="center"
-            android:text="💡\n\n 0 lux"
-            android:textSize="25sp" />
+            android:text="💡 0 lux"
+            android:textSize="22sp" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/magneticTextView"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:layout_weight="1"
             android:gravity="center"
-            android:text="🧭\n\n 0°"
-            android:textSize="25sp" />
+            android:text="🧭 0°"
+            android:textSize="22sp" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/stepTextView"
+    <FrameLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="0"
-        android:textColor="#673AB7"
-        android:textSize="150sp" />
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/stepTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="#673AB7"
+            android:textSize="150sp" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/circle_shape"
+            android:max="100"
+            android:progress="0"
+            android:progressDrawable="@drawable/circular_progress_bar" />
+    </FrameLayout>
 
     <Button
         android:id="@+id/resetButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="32dp"
+        android:layout_margin="24dp"
         android:padding="20dp"
-        android:text="Reset"
-     />
-
+        android:text="Reset" />
 </LinearLayout>
-
