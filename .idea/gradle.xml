@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/app/quiz" />
             <option value="$PROJECT_DIR$/app/unitconverter" />
             <option value="$PROJECT_DIR$/app/vocab" />
+            <option value="$PROJECT_DIR$/app/weather" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
