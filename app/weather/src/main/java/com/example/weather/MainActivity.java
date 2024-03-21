@@ -32,8 +32,9 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView locationTextView;
+
     private TextView textView;
+    private TextView locationTextView;
     private TextView tempTextView;
     private TextView humidTextView;
     private TextView cloudTextView;
@@ -49,13 +50,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView = findViewById(R.id.textView);
+        mapView = findViewById(R.id.mapView);
         locationTextView = findViewById(R.id.locationTextView);
         tempTextView = findViewById(R.id.tempTextView);
         humidTextView = findViewById(R.id.humidTextView);
         cloudTextView = findViewById(R.id.cloudTextView);
         rainTextView = findViewById(R.id.rainTextView);
         windTextView = findViewById(R.id.windTextView);
-        mapView = findViewById(R.id.mapView);
         progressBar = findViewById(R.id.progressBar);
 
         FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
                 if (location != null) {
                     myLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                    textView.setText(myLocation.toString());
                     if (googleMap != null) {
                         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 12));
                         googleMap.addMarker(new MarkerOptions().position(myLocation).title("You are here"));
@@ -81,19 +83,19 @@ public class MainActivity extends AppCompatActivity {
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 12));
                 return false;
             });
-            googleMap.setOnCameraMoveListener(() -> {
 
-            });
             googleMap.setOnCameraIdleListener(() -> {
-                LatLng center = googleMap.getCameraPosition().target;
-                showInfo(center);
+                LatLng location = googleMap.getCameraPosition().target;
+                showInfo(location);
             });
         });
+
     }
 
     private void showInfo(LatLng location) {
-        locationTextView.setText(getCityName(location.latitude, location.longitude));
         textView.setText(convertToDegreeMinutesSeconds(location.longitude) + ", " + convertToDegreeMinutesSeconds(location.latitude));
+        locationTextView.setText(getCityName(location.latitude, location.longitude));
+
         progressBar.setVisibility(View.VISIBLE);
         tempTextView.setVisibility(View.INVISIBLE);
         humidTextView.setVisibility(View.INVISIBLE);
@@ -158,6 +160,6 @@ public class MainActivity extends AppCompatActivity {
         coordinate = (coordinate - degree) * 60;
         int minute = (int) coordinate;
         double second = (coordinate - minute) * 60;
-        return degree + "° " + minute + "' " + (int) second;
+        return degree + "° " + minute + "' " + (int) second + "\"";
     }
 }
