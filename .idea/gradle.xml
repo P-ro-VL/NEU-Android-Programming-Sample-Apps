@@ -20,7 +20,6 @@
             <option value="$PROJECT_DIR$/app/unitconverter" />
             <option value="$PROJECT_DIR$/app/vocab" />
             <option value="$PROJECT_DIR$/app/weather" />
-            <option value="$PROJECT_DIR$/app/weather1" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
