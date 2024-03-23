@@ -87,20 +87,10 @@
         <State />
       </entry>
       <entry key="app.weather">
-        <State>
-          <runningDeviceTargetSelectedWithDropDown>
-            <Target>
-              <type value="RUNNING_DEVICE_TARGET" />
-              <deviceKey>
-                <Key>
-                  <type value="SERIAL_NUMBER" />
-                  <value value="19211FDEE0014R" />
-                </Key>
-              </deviceKey>
-            </Target>
-          </runningDeviceTargetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-03-21T18:10:44.631788Z" />
-        </State>
+        <State />
+      </entry>
+      <entry key="app.weather1">
+        <State />
       </entry>
     </value>
   </component>

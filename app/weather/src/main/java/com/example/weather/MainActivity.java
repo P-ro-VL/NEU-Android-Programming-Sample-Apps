@@ -1,21 +1,32 @@
 package com.example.weather;
 
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.os.Looper;
+import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -31,8 +42,10 @@ import java.net.URL;
 import java.util.List;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
+import android.os.Bundle;
 
+public class MainActivity extends AppCompatActivity {
+    private MapView mapView;
     private TextView textView;
     private TextView locationTextView;
     private TextView tempTextView;
@@ -41,16 +54,13 @@ public class MainActivity extends AppCompatActivity {
     private TextView rainTextView;
     private TextView windTextView;
     private ProgressBar progressBar;
-    private MapView mapView;
-    private GoogleMap googleMap;
-    private LatLng myLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        textView = findViewById(R.id.textView);
         mapView = findViewById(R.id.mapView);
+        textView = findViewById(R.id.textView);
         locationTextView = findViewById(R.id.locationTextView);
         tempTextView = findViewById(R.id.tempTextView);
         humidTextView = findViewById(R.id.humidTextView);
@@ -58,43 +68,32 @@ public class MainActivity extends AppCompatActivity {
         rainTextView = findViewById(R.id.rainTextView);
         windTextView = findViewById(R.id.windTextView);
         progressBar = findViewById(R.id.progressBar);
-
-        FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         } else {
-            fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
-                if (location != null) {
-                    myLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                    textView.setText(myLocation.toString());
-                    if (googleMap != null) {
+            mapView.onCreate(savedInstanceState);
+            mapView.getMapAsync(googleMap -> {
+                FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+                fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
+                    if (location != null) {
+                        LatLng myLocation = new LatLng(location.getLatitude(), location.getLongitude());
                         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 12));
                         googleMap.addMarker(new MarkerOptions().position(myLocation).title("You are here"));
+                        showInfo(myLocation);
                     }
+                });
+                googleMap.setOnCameraIdleListener(() -> {
+                    LatLng myLocation = googleMap.getCameraPosition().target;
                     showInfo(myLocation);
-                }
+                });
             });
         }
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(googleMap -> {
-            this.googleMap = googleMap;
-            googleMap.setMyLocationEnabled(true);
-            googleMap.setOnMyLocationButtonClickListener(() -> {
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 12));
-                return false;
-            });
-
-            googleMap.setOnCameraIdleListener(() -> {
-                LatLng location = googleMap.getCameraPosition().target;
-                showInfo(location);
-            });
-        });
-
     }
 
     private void showInfo(LatLng location) {
         textView.setText(convertToDegreeMinutesSeconds(location.longitude) + ", " + convertToDegreeMinutesSeconds(location.latitude));
         locationTextView.setText(getCityName(location.latitude, location.longitude));
+
 
         progressBar.setVisibility(View.VISIBLE);
         tempTextView.setVisibility(View.INVISIBLE);
@@ -137,9 +136,19 @@ public class MainActivity extends AppCompatActivity {
                 urlConnection.disconnect();
             } catch (Exception e) {
 
+
             }
         }).start();
     }
+
+    public static String convertToDegreeMinutesSeconds(double coordinate) {
+        int degree = (int) coordinate;
+        coordinate = (coordinate - degree) * 60;
+        int minute = (int) coordinate;
+        double second = (coordinate - minute) * 60;
+        return degree + "° " + minute + "' " + (int) second + "\"";
+    }
+
 
     private String getCityName(double latitude, double longitude) {
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
@@ -155,11 +164,4 @@ public class MainActivity extends AppCompatActivity {
         return "-";
     }
 
-    public static String convertToDegreeMinutesSeconds(double coordinate) {
-        int degree = (int) coordinate;
-        coordinate = (coordinate - degree) * 60;
-        int minute = (int) coordinate;
-        double second = (coordinate - minute) * 60;
-        return degree + "° " + minute + "' " + (int) second + "\"";
-    }
 }
