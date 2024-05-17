@@ -2,13 +2,40 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="MainActivityTest">
+        <State />
+      </entry>
       <entry key="app">
         <State />
       </entry>
-      <entry key="app.weather">
+      <entry key="app.calculator">
         <State />
       </entry>
-      <entry key="testScreenRotation()">
+      <entry key="app.clock">
+        <State />
+      </entry>
+      <entry key="app.expensify">
+        <State />
+      </entry>
+      <entry key="app.health">
+        <State />
+      </entry>
+      <entry key="app.music">
+        <State />
+      </entry>
+      <entry key="app.note">
+        <State />
+      </entry>
+      <entry key="app.quiz">
+        <State />
+      </entry>
+      <entry key="app.unitconverter">
+        <State />
+      </entry>
+      <entry key="app.vocab">
+        <State />
+      </entry>
+      <entry key="app.weather">
         <State />
       </entry>
     </value>

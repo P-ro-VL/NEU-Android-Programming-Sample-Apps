@@ -1,23 +1,62 @@
 package com.example.calculator;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import org.mariuszgromada.math.mxparser.Expression;
 
 public class MainActivity extends AppCompatActivity {
     private TextView editTextText;
+    private TextView equationTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         editTextText = findViewById(R.id.textViewResult);
+        equationTextView = findViewById(R.id.equationTextView);
+
+        loadRecentResult();
+
         setButtonClickListeners();
+        handleTheme();
+    }
+
+    public static final String RECENT_RESULT_KEY = "recent_result";
+
+    private void saveRecentResult(String result) {
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(RECENT_RESULT_KEY, result);
+        editor.apply();
+    }
+
+    private void loadRecentResult() {
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        String defaultValue = "";
+        String recentValue = sharedPref.getString(RECENT_RESULT_KEY, defaultValue);
+
+        editTextText.setText(recentValue);
+    }
+
+    private boolean isNightMode = false;
+    private void handleTheme() {
+        Button btn = findViewById(R.id.themeModeBtn);
+        btn.setOnClickListener((e) -> {
+            isNightMode = !isNightMode;
+            AppCompatDelegate.setDefaultNightMode(
+                    isNightMode ?
+                    AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+        });
     }
 
     private void setButtonClickListeners() {
@@ -31,9 +70,18 @@ public class MainActivity extends AppCompatActivity {
     private void onButtonClick(View view) {
         Button button = (Button) view;
         String buttonText = button.getText().toString();
+
+        if(!buttonText.equals("=")) {
+            equationTextView.setText("");
+        }
+
         switch (buttonText) {
             case "=":
-                calculateResult();
+                if(button.isEnabled()) {
+                    calculateResult(true);
+                    saveRecentResult(editTextText.getText().toString());
+                }
+                else return;
                 break;
             case "()":
                 handleParentheses();
@@ -51,7 +99,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void appendInput(String input) {
+        Button equalBtn = findViewById(R.id.buttonEqual);
+
         editTextText.setText(editTextText.getText().toString() + input);
+
+        boolean result = calculateResult(false);
+        equalBtn.setEnabled(result);
+        GradientDrawable background = new GradientDrawable();
+        background.setCornerRadius(Integer.MAX_VALUE * getResources().getDisplayMetrics().density);
+        if(!result) {
+            background.setTint(getBaseContext().getColor(R.color.smoke));
+        } else {
+            background.setTint(getBaseContext().getColor(R.color.light_orange));
+        }
+        equalBtn.setBackground(background);
     }
 
     private void removeLastInput() {
@@ -76,14 +137,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void calculateResult() {
+    private boolean calculateResult(boolean showResult) {
         try {
             String expression = editTextText.getText().toString();
             Expression expressionEval = new Expression(expression);
             double result = expressionEval.calculate();
-            editTextText.setText(String.valueOf(result));
+
+            if(Double.isNaN(result)) return false;
+            if(showResult) {
+                equationTextView.setText(editTextText.getText());
+                editTextText.setText(String.valueOf(result));
+            }
+
+            return true;
         } catch (Exception e) {
-            editTextText.setText("Error");
+            return false;
         }
     }
 }
